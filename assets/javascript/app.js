@@ -125,5 +125,5 @@ function clockUpdate() {
   var m = addZero(date.getMinutes());
   var s = addZero(date.getSeconds());
 
-  $('.digital-clock').text(h + ':' + m + ':' + s)
+  $('.digital-clock').text("TIME: " + " " + h + ':' + m + ':' + s)
 }
