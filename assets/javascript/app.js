@@ -20,15 +20,15 @@ $(document).ready(function () {
   $("#submit-btn").on("click", function (event) {
     event.preventDefault();
 
-    var employeeData = {
+    var trainData = {
       name: $("#name-input").val().trim(),
       destination: $("#destination-input").val().trim(),
       startTime: parseInt($("#start-input").val()),
       frequency: parseInt($("#frequency-input").val())
     };
 
-    // add employee to firebase using .push() method instead of .set()
-    database.ref().push(employeeData);
+    // add new train to firebase using .push() method instead of .set()
+    database.ref().push(trainData);
 
     // clear out any value in form input tags on page
     $("#name-input").val("");
@@ -38,7 +38,7 @@ $(document).ready(function () {
 
   });
 
-  // set up child_added event listener for firebase to send new information every time an employee is added and when the page loads
+  // set up child_added event listener for firebase to send new information every time a new train is added and when the page loads
   database.ref().on("child_added", function (childSnapshot) {
     console.log(childSnapshot.val());
     var name = childSnapshot.val().name;
@@ -74,7 +74,7 @@ $(document).ready(function () {
     console.log("ARRIVAL TIME: " + nextTrain);
 
 
-    // create a table row for my employee
+    // create a table row for train
     var $tr = $("<tr>");
     $tr
       .attr("employee-key", childSnapshot.key)
@@ -85,7 +85,7 @@ $(document).ready(function () {
       .append(`<td>${tMinutesTillTrain}</td>`)
       .append(`<td>${nextTrain}</td>`);
 
-    // select table's body and append employee table row
+    // select table's body and append train table row
     $("tbody#employee-info").append($tr);
 
 
